@@ -372,7 +372,7 @@ a58c995 (origin1/master) 第一次提交
 
 reset 回退版本，可以退回到之前的某一个提交状态
 
-![image-20240501184953214](./../images/image-20240501184953214.png)
+![](https://cdn.jsdelivr.net/gh/xiaowang872/blogimage@main/images/image-20240501184953214.png)
 
 准备：
 
