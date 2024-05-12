@@ -106,6 +106,41 @@ ln -s /apps/nginx/sbin/nginx /usr/bin/
 nginx
 ~~~
 
-## 11.网址： ip
+## 11.配置nginx自启动文件
+~~~
+ vim /usr/lib/systemd/system/nginx.service
+
+[Unit]
+Description=The nginx HTTP and reverse proxy server
+Documentation=http://nginx.org/en/docs/    
+After=network.target remote-fs.target nss-lookup.target
+Wants=network-online.target
+
+[Service]
+Type=forking
+PIDFile=/apps/nginx/run/nginx.pid
+ExecStart=/apps/nginx/sbin/nginx -c /apps/nginx/conf/nginx.conf
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+~~~
+
+## 12.写入pid
+~~~
+mkdir /apps/nginx/run/
+
+vim /apps/nginx/conf/nginx.conf
+pid        /apps/nginx/run/nginx.pid;
+~~~
+
+## 13.加载配置的自启动文件
+~~~
+systemctl daemon-reload
+systemctl enable --now nginx
+~~~
+
+## 13.网址： ip
 
 ![](https://cdn.jsdelivr.net/gh/xiaowang872/blogimage@main/images/QQ%E6%88%AA%E5%9B%BE20240512114732.png)
